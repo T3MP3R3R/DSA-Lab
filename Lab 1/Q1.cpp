@@ -32,7 +32,7 @@ int main() {
     BankAccount acc3(acc2);
     acc3.withdraw(200);
     cout << "Balance of account 3 after withdrawal: $" << acc3.getBal() << endl;
-    cout << "Balance of account 2: $" << acc2.getBal() << endl;
+    cout << "Balance of account 2: $" << acc2.getBal() << endl; // Unchanged
 
     return 0;
 }

@@ -1,35 +1,28 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
 class Exam {
 private:
-    char* studentName;
-    char* examDate;
+    string studentName;
+    string examDate;
     float score;
 
 public:
-    Exam(const char* name, const char* date, float s) {
-        studentName = new char[strlen(name) + 1];
-        strcpy(studentName, name);
-        examDate = new char[strlen(date) + 1];
-        strcpy(examDate, date);
+    Exam(string name, string date, float s) {
+        studentName = name;
+        examDate = date;
         score = s;
     }
-    ~Exam() {
-        delete[] studentName;
-        delete[] examDate;
+
+    void setStudentName(string name) {
+        studentName = name;
     }
-    void setStudentName(const char* name) {
-        delete[] studentName;
-        studentName = new char[strlen(name) + 1];
-        strcpy(studentName, name);
+
+    void setExamDate(string date) {
+        examDate = date;
     }
-    void setExamDate(const char* date) {
-        delete[] examDate;
-        examDate = new char[strlen(date) + 1];
-        strcpy(examDate, date);
-    }
+
     void setScore(float s) {
         score = s;
     }
@@ -61,4 +54,5 @@ int main() {
     cout << "\nExam1 details (after modifying Exam2):\n";
     exam1.display();
     return 0;
+
 }

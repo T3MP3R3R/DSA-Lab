@@ -5,7 +5,7 @@ struct Node {
     int data;
     Node* next;
 
-    Node(int d, Node* n = NULL) : data(d), next(n) {}
+    Node(int d, Node* n = nullptr) : data(d), next(n) {}
 };
 
 int findLength(Node* head, int count = 0) {

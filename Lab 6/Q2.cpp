@@ -35,14 +35,10 @@ private:
     }
 
     double applyDiscount(double amt) {
-        if (amt >= 1500)
-            return amt * 0.7;
-        else if (amt >= 1000)
-            return amt * 0.85;
-        else if (amt >= 500)
-            return amt * 0.95;
-        else
-            return amt;
+        if (amt >= 1500) return amt * 0.7;
+        else if (amt >= 1000) return amt * 0.85;
+        else if (amt >= 500) return amt * 0.95;
+        else return amt;
     }
 
 public:
@@ -136,4 +132,5 @@ int main() {
     stack.display();
 
     return 0;
+
 }

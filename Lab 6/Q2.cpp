@@ -8,11 +8,11 @@ class Transaction{
 public:
     int id;
     double amount;
-    string description;
+    string desc;
     int flag;
-    Transaction() : id(0), amount(0), description(""), flag(1) {}
+    Transaction() : id(0), amount(0), desc(""), flag(1) {}
     
-    Transaction(int id, double amount, string desc) : id(id), amount(amount), description(desc){
+    Transaction(int id, double amount, string desc) : id(id), amount(amount), desc(desc){
         flag = (amount >= 0) ? 1 : 0;
     }
 };
@@ -35,10 +35,14 @@ private:
     }
 
     double applyDiscount(double amt) {
-        if (amt >= 1500) return amt * 0.7;
-        else if (amt >= 1000) return amt * 0.85;
-        else if (amt >= 500) return amt * 0.95;
-        else return amt;
+        if (amt >= 1500)
+            return amt * 0.7;
+        else if (amt >= 1000)
+            return amt * 0.85;
+        else if (amt >= 500)
+            return amt * 0.95;
+        else
+            return amt;
     }
 
 public:
@@ -50,7 +54,7 @@ public:
 
     void push(Transaction t) {
         t.id = nextID++;
-        t.description = truncateDesc(t.description);
+        t.desc = truncateDesc(t.desc);
 
         if (t.amount >= 0) {
             t.amount = applyDiscount(t.amount);
@@ -63,7 +67,7 @@ public:
         newNode->next = topNode;
         topNode = newNode;
 
-        cout << t.id << ". " << (t.flag == 1 ? "Sale: " : "Refund: ") << t.description
+        cout << t.id << ". " << (t.flag == 1 ? "Sale: " : "Refund: ") << t.desc
              << " (" << t.amount << ")";
         if (t.flag == 1) {
             if (t.amount >= 1500) cout << " -> Discount 30%";
@@ -83,7 +87,7 @@ public:
         topNode = topNode->next;
 
         temp->data.amount *= -1;
-        temp->data.description += " [REVERSED]";
+        temp->data.desc += " [REVERSED]";
         temp->data.flag = 2;
 
         Transaction popped = temp->data;
@@ -96,7 +100,7 @@ public:
         Node* curr = topNode;
         while (curr) {
             cout << "[id=" << curr->data.id << ", amt=" << curr->data.amount
-                 << ", desc=\"" << curr->data.description << "\", flag=" << curr->data.flag << "]" << endl;
+                 << ", desc=\"" << curr->data.desc << "\", flag=" << curr->data.flag << "]" << endl;
             curr = curr->next;
         }
     }
@@ -104,7 +108,7 @@ public:
 
 int main() {
     srand(time(0));
-    Transaction transactions[7] = {
+    Transaction transacts[7] = {
         Transaction(0, 1200, "Sale: Blue Jacket"),
         Transaction(0, 450, "Sale: Cotton Socks"),
         Transaction(0, -300, "Refund: Defective Shirt"),
@@ -119,18 +123,17 @@ int main() {
     cout << "Pushing Transactions:" << endl;
     for (int i = 0; i < 4; i++) {
         int idx = rand() % 7;
-        stack.push(transactions[idx]);
+        stack.push(transacts[idx]);
     }
 
     cout << endl;
     stack.display();
-    cout << endl << "Popping one transaction:" << endl;
+    cout << endl << "Popping a transaction..." << endl;
     Transaction popped = stack.pop();
-    cout << "Popped Transaction: " << popped.description << endl << "Amount changed to " << popped.amount
+    cout << "Popped Transaction: " << popped.desc << endl << "Amount changed to " << popped.amount
          << endl << "Flag updated to " << popped.flag << endl;
-    cout << endl << "Stack after pop:" << endl;
+    cout << endl;         
     stack.display();
 
     return 0;
-
 }

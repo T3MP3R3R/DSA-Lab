@@ -35,14 +35,10 @@ private:
     }
 
     double applyDiscount(double amt) {
-        if (amt >= 1500)
-            return amt * 0.7;
-        else if (amt >= 1000)
-            return amt * 0.85;
-        else if (amt >= 500)
-            return amt * 0.95;
-        else
-            return amt;
+        if (amt >= 1500) return amt * 0.7;
+        else if (amt >= 1000) return amt * 0.85;
+        else if (amt >= 500) return amt * 0.95;
+        else return amt;
     }
 
 public:
@@ -52,7 +48,7 @@ public:
         return topNode == nullptr;
     }
 
-    void push(Transaction t) {
+    void push(Transaction t){
         t.id = nextID++;
         t.desc = truncateDesc(t.desc);
 
@@ -98,15 +94,21 @@ public:
     void display(){
         cout << "Current Stack (top to bottom):" << endl;
         Node* curr = topNode;
+        cout << "Top -> ";
         while (curr) {
             cout << "[id=" << curr->data.id << ", amt=" << curr->data.amount
-                 << ", desc=\"" << curr->data.desc << "\", flag=" << curr->data.flag << "]" << endl;
+                 << ", desc=\"" << curr->data.desc << "\", flag=" << curr->data.flag << "]";
+            
+            if (curr->next == nullptr) {
+                cout << " <- Bottom";
+            }
+            cout << endl;
             curr = curr->next;
         }
     }
 };
 
-int main() {
+int main(){
     srand(time(0));
     Transaction transacts[7] = {
         Transaction(0, 1200, "Sale: Blue Jacket"),

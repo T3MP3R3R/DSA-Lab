@@ -41,7 +41,7 @@ int getLength(Node* head) {
 void radixSort(Node*& head) {
     if (!head) return;
 
-    int exp = 1; // I could've used cmath but nope
+    int exp = 1; // could've used cmath but nope
     int maxScore = getMax(head);
 
     while (maxScore / exp>0) {
